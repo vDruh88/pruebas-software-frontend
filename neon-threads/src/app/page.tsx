@@ -1,39 +1,6 @@
 import Image from "next/image";
-import { MongoClient } from 'mongodb';
-import PrendasList from "./components/rendasList";
 
-interface Prenda {
-  _id: string;
-  nombre: string;
-  precio: number;
-  descripcion: string;
-  color: string[];	
-  talla: string[];
-}
-
-async function fetchPrendas(): Promise<Prenda[]> {
-  const uri = process.env.MONGODB_URI;
-
-  if (!uri) {
-    throw new Error("MongoDB URI is not defined");
-  }
-
-  const client = new MongoClient(uri);
-  async function run() {
-    try {
-      await client.connect();
-      console.log("Connected to the database");
-      const result = await client.db("pruebas-software").collection("prendas").find({}).toArray();
-      return result;
-    } catch (e) {
-      console.error(e);
-      return [];
-    } finally {
-      await client.close();
-    }
-  }
-  run().catch(console.dir);
-  
+export default function Home() {
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
