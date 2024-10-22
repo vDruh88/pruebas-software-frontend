@@ -1,0 +1,184 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Quicksand', sans-serif;
+}
+
+body {
+  background: #000;
+}
+
+section {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2px;
+  flex-wrap: wrap;
+  overflow: hidden;
+}
+
+section::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(#000, #5e5ad7, #000);
+  animation: animate 5s linear infinite;
+  z-index: 1;
+}
+
+@keyframes animate {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+section span {
+  position: relative;
+  display: block;
+  width: calc(6.25vw - 2px);
+  height: calc(6.25vw - 2px);
+  background: #181818;
+  z-index: 2;
+  transition: 1.5s;
+}
+
+section span:hover {
+  background: #1b0764;
+  transition: 0s;
+}
+
+/* Aumentar tamaño de la caja */
+section .signin {
+  position: absolute;
+  width: 500px; /* Aumentar ancho */
+  background: #222;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px; /* Aumentar padding */
+  border-radius: 4px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.9);
+}
+
+section .signin .content {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 40px;
+}
+
+section .signin .content h2 {
+  font-size: 2.5em; /* Título más grande */
+  color: #5e5ad7;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+section .signin .form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 30px; /* Mayor espacio entre los campos */
+}
+
+section .signin .form .inputBox {
+  position: relative;
+  width: 100%;
+}
+
+section .signin .form .inputBox input {
+  width: 100%;
+  background: #333;
+  border: none;
+  outline: none;
+  padding: 25px 15px; /* Hacer los campos de texto más grandes */
+  border-radius: 4px;
+  color: #fff;
+  font-weight: 500;
+  font-size: 1.2em; /* Texto más grande */
+}
+
+section .signin .form .inputBox i {
+  position: absolute;
+  left: 0;
+  padding: 15px 10px;
+  font-style: normal;
+  color: #aaa;
+  transition: 0.5s;
+}
+
+.signin .form .inputBox input:focus ~ i,
+.signin .form .inputBox input:valid ~ i {
+  transform: translateY(-7.5px);
+  font-size: 0.8em;
+  color: #fff;
+}
+
+.custom-button {
+  padding: 15px; /* Botones más grandes */
+  background-color: #5e5ad7 !important;
+  color: #000 !important;
+  font-weight: 600 !important;
+  font-size: 1.4em !important;
+  cursor: pointer !important;
+  width: 100% !important;
+  text-align: center !important;
+  border-radius: 4px !important;
+}
+
+.custom-button:hover {
+  background-color: #4a47c7 !important;
+}
+
+.signin .form p {
+  text-align: center;
+  color: #fff;
+}
+
+.signin .form p a {
+  color: #5e5ad7;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.signin .form p a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 900px) {
+  section span {
+    width: calc(10vw - 2px);
+    height: calc(10vw - 2px);
+  }
+
+  section .signin {
+    width: 90%; /* Ajustar ancho para pantallas más pequeñas */
+    padding: 40px;
+  }
+}
+
+@media (max-width: 600px) {
+  section span {
+    width: calc(20vw - 2px);
+    height: calc(20vw - 2px);
+  }
+
+  section .signin {
+    width: 100%; /* Ajustar ancho para pantallas muy pequeñas */
+    padding: 30px;
+  }
+}
