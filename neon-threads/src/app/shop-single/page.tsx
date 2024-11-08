@@ -1,17 +1,13 @@
-'use client';
+// src/app/shop-single/page.tsx
+"use client";
 
-import React, { useState } from 'react';
+import React from 'react';
 import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import Navbar from '@/components/Navbar';
 
 const Page: React.FC = () => {
-  const [quantity, setQuantity] = useState(1);
-
-  const incrementQuantity = () => setQuantity(quantity + 1);
-  const decrementQuantity = () => setQuantity(quantity > 1 ? quantity - 1 : 1);
-
   return (
     <div>
       <Navbar />
@@ -22,7 +18,6 @@ const Page: React.FC = () => {
           
           {/* Product Image */}
           <div className="lg:w-1/2 w-full p-4">
-            {/* Tarjeta blanca que envuelve la imagen */}
             <div className="bg-white rounded-md shadow-lg p-4 flex justify-center items-center">
               <Image
                 className="rounded"
@@ -50,9 +45,7 @@ const Page: React.FC = () => {
               </div>
 
               {/* Texto de calificación */}
-              <p className="text-gray-600">
-                Clasificación 4.8 | 36 Comentarios
-              </p>
+              <p className="text-gray-600">Clasificación 4.8 | 36 Comentarios</p>
             </div>
 
             {/* Añadir espacio entre las estrellas y la Categoría */}
@@ -100,9 +93,9 @@ const Page: React.FC = () => {
               {/* Cantidad */}
               <div className="flex items-center space-x-2">
                 <h6 className="font-bold text-black">Cantidad:</h6>
-                <button onClick={decrementQuantity} className="px-3 py-1 bg-purple-600 text-white rounded">-</button>
-                <span className="text-gray-600">{quantity}</span>
-                <button onClick={incrementQuantity} className="px-3 py-1 bg-purple-600 text-white rounded">+</button>
+                <button className="px-3 py-1 bg-purple-600 text-white rounded">-</button>
+                <span className="text-gray-600">1</span>
+                <button className="px-3 py-1 bg-purple-600 text-white rounded">+</button>
               </div>
             </div>
 

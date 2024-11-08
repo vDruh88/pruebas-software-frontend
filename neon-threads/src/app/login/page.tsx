@@ -22,13 +22,40 @@ export default function LoginPage() {
 }
 
 function LoginForm({ onToggle }: { onToggle: () => void }) {
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
+    const username = (document.getElementById('loginUsername') as HTMLInputElement).value;
+    const password = (document.getElementById('loginPassword') as HTMLInputElement).value;
+
+    try {
+      const response = await fetch('http://3.147.32.9:6000/api/user/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password }),
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        alert(`Bienvenido, ${data.user.name}`);
+        // Aquí puedes redirigir al usuario a la página de inicio o guardar su información en el estado
+      } else {
+        alert(data.message || 'Error de inicio de sesión');
+      }
+    } catch (error) {
+      console.error('Error de conexión:', error);
+      alert('Error de conexión con el servidor');
+    }
+  };
+
   return (
     <div className="content">
       <h2 className="text-2xl font-bold text-center mb-6 text-[#5e5ad7]">Iniciar Sesión</h2>
-      <form className="form">
+      <form className="form" onSubmit={handleSubmit}>
         <div className="inputBox">
           <input type="text" id="loginUsername" className="custom-input" required />
-          <i>Nombre de Usuario</i>
+          <i>Correo</i>
         </div>
         <div className="inputBox">
           <input type="password" id="loginPassword" className="custom-input" required />
@@ -49,8 +76,10 @@ function LoginForm({ onToggle }: { onToggle: () => void }) {
 }
 
 function RegisterForm({ onToggle }: { onToggle: () => void }) {
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
+    const username = (document.getElementById('registerUsername') as HTMLInputElement).value;
+    const email = (document.getElementById('registerEmail') as HTMLInputElement).value;
     const password = (document.getElementById('registerPassword') as HTMLInputElement).value;
     const confirmPassword = (document.getElementById('confirmPassword') as HTMLInputElement).value;
 
@@ -59,8 +88,31 @@ function RegisterForm({ onToggle }: { onToggle: () => void }) {
       return;
     }
 
-    // Aquí puedes proceder con el envío del formulario si las contraseñas coinciden
-    alert('Registro exitoso');
+    // Llamada a la API para agregar el usuario
+    try {
+      const response = await fetch(`http://3.147.32.9:6000/api/user/register`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: username,
+          pass: password,
+          email: email,
+          user_type: 1, 
+        }),
+      });
+
+      if (response.ok) {
+        alert('Registro exitoso');
+        onToggle(); // Cambia a la vista de inicio de sesión
+      } else {
+        alert('Hubo un problema al registrar el usuario');
+      }
+    } catch (error) {
+      console.error('Error al registrar usuario:', error);
+      alert('Error de conexión con el servidor');
+    }
   };
 
   return (
@@ -95,5 +147,4 @@ function RegisterForm({ onToggle }: { onToggle: () => void }) {
       </form>
     </div>
   );
-
 }
