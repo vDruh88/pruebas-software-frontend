@@ -24,22 +24,21 @@ export default function LoginPage() {
 function LoginForm({ onToggle }: { onToggle: () => void }) {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    const username = (document.getElementById('loginUsername') as HTMLInputElement).value;
+    const email = (document.getElementById('loginUsername') as HTMLInputElement).value;
     const password = (document.getElementById('loginPassword') as HTMLInputElement).value;
 
     try {
-      const response = await fetch('http://3.147.32.9:6000/api/user/login', {
+      const response = await fetch('https://3.147.32.9/api/user/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify({ email, password }),
       });
 
       const data = await response.json();
       if (response.ok) {
         alert(`Bienvenido, ${data.user.name}`);
-        // Aquí puedes redirigir al usuario a la página de inicio o guardar su información en el estado
       } else {
         alert(data.message || 'Error de inicio de sesión');
       }
@@ -90,7 +89,7 @@ function RegisterForm({ onToggle }: { onToggle: () => void }) {
 
     // Llamada a la API para agregar el usuario
     try {
-      const response = await fetch(`http://3.147.32.9:6000/api/user/register`, {
+      const response = await fetch(`https://3.147.32.9/api/user/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

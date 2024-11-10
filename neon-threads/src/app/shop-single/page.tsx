@@ -10,7 +10,7 @@ import Navbar from '@/components/Navbar';
 const Page: React.FC = () => {
   return (
     <div>
-      <Navbar />
+      <Navbar userType={1}/>
 
       {/* Main Content */}
       <section className="py-10 min-h-screen bg-gray-900 text-white">
