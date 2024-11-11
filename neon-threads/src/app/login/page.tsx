@@ -25,7 +25,7 @@ function LoginForm({ onToggle }: { onToggle: () => void }) {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     const email = (document.getElementById('loginUsername') as HTMLInputElement).value;
-    const password = (document.getElementById('loginPassword') as HTMLInputElement).value;
+    const pass = (document.getElementById('loginPassword') as HTMLInputElement).value;
 
     try {
       const response = await fetch('https://3.147.32.9/api/user/login', {
@@ -33,12 +33,13 @@ function LoginForm({ onToggle }: { onToggle: () => void }) {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email, pass }),
       });
 
       const data = await response.json();
       if (response.ok) {
-        alert(`Bienvenido, ${data.user.name}`);
+        alert(`Bienvenido`);
+
       } else {
         alert(data.message || 'Error de inicio de sesión');
       }
@@ -79,10 +80,10 @@ function RegisterForm({ onToggle }: { onToggle: () => void }) {
     event.preventDefault();
     const username = (document.getElementById('registerUsername') as HTMLInputElement).value;
     const email = (document.getElementById('registerEmail') as HTMLInputElement).value;
-    const password = (document.getElementById('registerPassword') as HTMLInputElement).value;
+    const pass = (document.getElementById('registerPassword') as HTMLInputElement).value;
     const confirmPassword = (document.getElementById('confirmPassword') as HTMLInputElement).value;
 
-    if (password !== confirmPassword) {
+    if (pass !== confirmPassword) {
       alert('Las contraseñas no coinciden');
       return;
     }
@@ -96,7 +97,7 @@ function RegisterForm({ onToggle }: { onToggle: () => void }) {
         },
         body: JSON.stringify({
           name: username,
-          pass: password,
+          pass: pass,
           email: email,
           user_type: 1, 
         }),
